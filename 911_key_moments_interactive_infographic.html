@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>9/11 — The Morning That Changed America</title>
+<style>
+:root{
+ --navy:#071a33;--ink:#10233f;--cream:#fff9ed;--white:#fff;
+ --red:#f04b45;--orange:#ff9f43;--yellow:#ffd166;--teal:#22b8a7;--blue:#3b82f6;
+ --muted:#65748b;--shadow:0 18px 50px rgba(7,26,51,.12)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+ background:
+ radial-gradient(circle at 8% 10%,rgba(255,209,102,.22),transparent 24%),
+ radial-gradient(circle at 92% 20%,rgba(34,184,167,.13),transparent 26%),
+ linear-gradient(135deg,#f7fbff,#fffaf0 52%,#f4f0ff);
+}
+.hero{
+ min-height:590px;position:relative;overflow:hidden;padding:70px 7vw 80px;color:white;
+ background:
+ linear-gradient(135deg,rgba(7,26,51,.98),rgba(12,48,79,.96) 58%,rgba(28,88,116,.92)),
+ repeating-linear-gradient(90deg,transparent 0 70px,rgba(255,255,255,.035) 71px 73px);
+}
+.hero:before{
+ content:"";position:absolute;right:-130px;top:-170px;width:510px;height:510px;border-radius:50%;
+ background:radial-gradient(circle,rgba(255,209,102,.55) 0 8%,rgba(255,159,67,.22) 35%,transparent 68%);
+}
+.hero:after{
+ content:"";position:absolute;left:-100px;bottom:-210px;width:560px;height:360px;
+ border-radius:50%;background:rgba(59,130,246,.12);
+}
+.hero-inner{max-width:1100px;margin:auto;position:relative;z-index:2}
+.eyebrow{
+ display:inline-flex;align-items:center;gap:8px;text-transform:uppercase;letter-spacing:.16em;
+ font-size:.78rem;font-weight:900;color:#ffd166;background:rgba(255,255,255,.08);
+ padding:9px 13px;border:1px solid rgba(255,255,255,.14);border-radius:999px
+}
+.eyebrow span{width:8px;height:8px;border-radius:50%;background:#f04b45;box-shadow:0 0 0 5px rgba(240,75,69,.15)}
+h1{font-size:clamp(3.2rem,8vw,7rem);line-height:.86;letter-spacing:-.055em;margin:24px 0 22px;max-width:920px}
+.hero h1 em{font-style:normal;color:#ffd166}
+.hero-copy{font-size:1.15rem;line-height:1.65;max-width:760px;color:#e8f1f8}
+.hero-stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hero-stat{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(8px);border-radius:16px;padding:13px 17px}
+.hero-stat b{font-size:1.45rem;color:white;display:block}.hero-stat span{font-size:.75rem;color:#b9cad8}
+.scroll{margin-top:42px;display:inline-flex;align-items:center;gap:8px;color:white;text-decoration:none;font-weight:800}
+.scroll .arrow{animation:bob 1.5s infinite}@keyframes bob{50%{transform:translateY(5px)}}
+
+main{max-width:1120px;margin:auto;padding:48px 5vw 75px}
+.notice{
+ background:white;border-radius:24px;padding:24px 28px;box-shadow:var(--shadow);
+ display:flex;gap:18px;align-items:flex-start;border-left:7px solid var(--red)
+}
+.notice-icon{font-size:1.7rem}.notice p{margin:0;line-height:1.65}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin:50px 0 22px}
+.section-head h2{font-size:2.2rem;letter-spacing:-.03em;margin:0}.section-head p{color:var(--muted);margin:0;max-width:510px;line-height:1.5}
+
+.controls{display:flex;gap:9px;flex-wrap:wrap;margin:24px 0 30px}
+button{
+ border:2px solid #e4eaf1;background:white;color:var(--ink);font:inherit;font-weight:850;
+ padding:10px 15px;border-radius:999px;cursor:pointer;transition:.2s;box-shadow:0 5px 16px rgba(7,26,51,.05)
+}
+button:hover{transform:translateY(-2px);border-color:#9bb3cb}
+button.active{background:var(--navy);color:white;border-color:var(--navy)}
+
+.timeline{position:relative}
+.timeline:before{
+ content:"";position:absolute;left:31px;top:20px;bottom:20px;width:6px;border-radius:8px;
+ background:linear-gradient(#ffd166,#ff9f43,#f04b45,#3b82f6,#22b8a7)
+}
+.event{position:relative;padding-left:83px;margin-bottom:22px}
+.event.hidden{display:none}
+.dot{
+ position:absolute;left:8px;top:15px;width:48px;height:48px;border-radius:16px;display:grid;place-items:center;
+ color:white;font-weight:950;font-size:1.1rem;border:5px solid #f7fbff;box-shadow:0 7px 18px rgba(7,26,51,.2);
+ transform:rotate(-3deg)
+}
+.event:nth-child(even) .dot{transform:rotate(3deg)}
+.card{
+ background:white;border-radius:24px;padding:24px 27px;box-shadow:0 10px 32px rgba(7,26,51,.09);
+ border:1px solid #edf1f5;cursor:pointer;transition:.25s;position:relative;overflow:hidden
+}
+.card:hover{transform:translateX(5px);box-shadow:0 16px 38px rgba(7,26,51,.13)}
+.card:after{content:"";position:absolute;right:-45px;top:-45px;width:120px;height:120px;border-radius:50%;background:rgba(255,209,102,.13)}
+.time{
+ display:inline-block;font-size:.75rem;font-weight:950;letter-spacing:.08em;text-transform:uppercase;
+ color:#c44943;background:#fff0ee;padding:6px 9px;border-radius:8px
+}
+h3{margin:10px 0 7px;font-size:1.4rem;color:var(--navy);position:relative;z-index:1}
+.summary{margin:0;line-height:1.6;color:#3d4c60;position:relative;z-index:1}
+.details{display:none;margin-top:16px;padding:16px;border-radius:14px;background:#f5f8fb;line-height:1.65;color:#435267;position:relative;z-index:1}
+.card.open .details{display:block}
+.hint{margin-top:13px;font-size:.76rem;font-weight:800;color:#7a8798;position:relative;z-index:1}
+.card.open .hint{color:var(--teal)}
+
+.milestones{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:45px}
+.milestone{padding:20px;border-radius:20px;min-height:150px;color:white;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.milestone:after{content:"";position:absolute;width:90px;height:90px;border-radius:50%;right:-25px;bottom:-30px;background:rgba(255,255,255,.12)}
+.milestone:nth-child(1){background:#10233f}.milestone:nth-child(2){background:#f04b45}.milestone:nth-child(3){background:#22a895}.milestone:nth-child(4){background:#3b82f6}
+.milestone b{display:block;font-size:2.15rem;line-height:1;margin-bottom:10px}.milestone span{font-weight:700;line-height:1.4}
+
+.sources{margin-top:48px;background:white;border-radius:24px;padding:24px 28px;box-shadow:var(--shadow)}
+.sources h2{margin-top:0}.sources p{line-height:1.7;color:#536176}
+.sources a{color:#277da1;font-weight:800}
+footer{text-align:center;color:#718096;font-size:.8rem;line-height:1.6;padding:0 5vw 42px}
+
+@media(max-width:800px){
+ .milestones{grid-template-columns:repeat(2,1fr)}
+ .section-head{display:block}.section-head p{margin-top:9px}
+}
+@media(max-width:550px){
+ .hero{min-height:560px;padding:45px 6vw 55px}.hero-stats{display:grid;grid-template-columns:1fr 1fr}
+ main{padding-left:5vw;padding-right:5vw}
+ .notice{padding:20px}.timeline:before{left:22px}.event{padding-left:59px}.dot{left:0;width:44px;height:44px}
+ .card{padding:20px}.milestones{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="hero">
+ <div class="hero-inner">
+  <div class="eyebrow"><span></span> Historical interactive infographic</div>
+  <h1>September 11,<br><em>2001</em></h1>
+  <p class="hero-copy">The morning a series of coordinated terrorist attacks changed New York City, the United States and the world. Explore the key moments of the World Trade Center attacks and the wider response.</p>
+  <div class="hero-stats">
+   <div class="hero-stat"><b>8:46 a.m.</b><span>First plane hits WTC</span></div>
+   <div class="hero-stat"><b>9:03 a.m.</b><span>Second plane hits WTC</span></div>
+   <div class="hero-stat"><b>9:59 a.m.</b><span>South Tower collapses</span></div>
+   <div class="hero-stat"><b>10:28 a.m.</b><span>North Tower collapses</span></div>
+  </div>
+  <a class="scroll" href="#timeline">Explore the timeline <span class="arrow">↓</span></a>
+ </div>
+</header>
+
+<main>
+ <section class="notice">
+  <div class="notice-icon">🕊️</div>
+  <p><strong>A day of remembrance.</strong> This timeline is intentionally non-graphic and focuses on the sequence of events, the emergency response and the people affected. All times are Eastern Daylight Time (EDT).</p>
+ </section>
+
+ <div class="section-head" id="timeline">
+  <div><h2>The morning, moment by moment</h2></div>
+  <p>Click a moment to reveal more context. Use the buttons to focus on attacks, response or aftermath.</p>
+ </div>
+
+ <div class="controls">
+  <button class="active" data-filter="all">✦ All moments</button>
+  <button data-filter="attacks">✈ Attacks</button>
+  <button data-filter="response">🚨 Response</button>
+  <button data-filter="aftermath">🕊 Aftermath</button>
+ </div>
+
+ <section class="timeline">
+  <article class="event" data-type="attacks">
+   <div class="dot" style="background:#f9a825">01</div>
+   <div class="card" tabindex="0">
+    <div class="time">8:46 a.m.</div>
+    <h3>Flight 11 strikes the North Tower</h3>
+    <p class="summary">American Airlines Flight 11 crashes into the North Tower of the World Trade Center.</p>
+    <div class="details">Flight 11 was traveling from Boston to Los Angeles. The plane struck floors 93–99 of the North Tower, beginning the attacks in Lower Manhattan.</div>
+    <div class="hint">Tap to reveal details ↗</div>
+   </div>
+  </article>
+
+  <article class="event" data-type="attacks">
+   <div class="dot" style="background:#f04b45">02</div>
+   <div class="card" tabindex="0">
+    <div class="time">9:03 a.m.</div>
+    <h3>Flight 175 hits the South Tower</h3>
+    <p class="summary">A second hijacked plane crashes into the World Trade Center, making clear that the first crash was part of a coordinated attack.</p>
+    <div class="details">United Airlines Flight 175, also traveling from Boston to Los Angeles, strikes floors 77–85 of the South Tower. Television cameras capture the impact live.</div>
+    <div class="hint">Tap to reveal details ↗</div>
+   </div>
+  </article>
+
+  <article class="event" data-type="response">
+   <div class="dot" style="background:#22a895">03</div>
+   <div class="card" tabindex="0">
+    <div class="time">9:05 a.m.</div>
+    <h3>The President is informed</h3>
+    <p class="summary">President George W. Bush is told that a second plane has struck the World Trade Center.</p>
+    <div class="details">Bush was visiting an elementary school in Sarasota, Florida. Chief of Staff Andrew Card informed him about the second crash.</div>
+    <div class="hint">Tap to reveal details ↗</div>
+   </div>
+  </article>
+
+  <article class="event" data-type="attacks">
+   <div class="dot" style="background:#3b82f6">04</div>
+   <div class="card" tabindex="0">
+    <div class="time">9:37 a.m.</div>
+    <h3>Flight 77 strikes the Pentagon</h3>
+    <p class="summary">A third hijacked aircraft crashes into the Pentagon in Arlington, Virginia.</p>
+    <div class="details">American Airlines Flight 77 was traveling from Washington Dulles International Airport to Los Angeles. The crash expands the attack beyond New York City.</div>
+    <div class="hint">Tap to reveal details ↗</div>
+   </div>
+  </article>
+
+  <article class="event" data-type="attacks">
+   <div class="dot" style="background:#f04b45">05</div>
+   <div class="card" tabindex="0">
+    <div class="time">9:59 a.m.</div>
+    <h3>The South Tower collapses</h3>
+    <p class="summary">The South Tower collapses after burning for less than an hour following the plane's impact.</p>
+    <div class="details">The South Tower collapses approximately 56 minutes after Flight 175 struck it. The collapse transforms the emergency response in Lower Manhattan.</div>
+    <div class="hint">Tap to reveal details ↗</div>
+   </div>
+  </article>
+
+  <article class="event" data-type="attacks">
+   <div class="dot" style="background:#f9a825">06</div>
+   <div class="card" tabindex="0">
+    <div class="time">10:03 a.m.</div>
+    <h3>Flight 93 crashes in Pennsylvania</h3>
+    <p class="summary">Passengers and crew attempt to regain control of United Airlines Flight 93 before it crashes near Shanksville.</p>
+    <div class="details">Flight 93 was headed toward Washington, D.C. The 9/11 Commission concluded that passengers and crew fought back against the hijackers, preventing the aircraft from reaching its intended target.</div>
+    <div class="hint">Tap to reveal details ↗</div>
+   </div>
+  </article>
+
+  <article class="event" data-type="attacks">
+   <div class="dot" style="background:#3b82f6">07</div>
+   <div class="card" tabindex="0">
+    <div class="time">10:28 a.m.</div>
+    <h3>The North Tower collapses</h3>
+    <p class="summary">The North Tower collapses, marking the destruction of both World Trade Center towers.</p>
+    <div class="details">The North Tower falls approximately 102 minutes after Flight 11 struck it. Emergency personnel continue searching through the debris and surrounding area.</div>
+    <div class="hint">Tap to reveal details ↗</div>
+   </div>
+  </article>
+
+  <article class="event" data-type="aftermath">
+   <div class="dot" style="background:#22a895">08</div>
+   <div class="card" tabindex="0">
+    <div class="time">Later that morning</div>
+    <h3>A massive rescue effort begins</h3>
+    <p class="summary">Firefighters, police officers, emergency workers and civilians search for survivors amid the destruction in Lower Manhattan.</p>
+    <div class="details">The attacks ultimately killed 2,977 people. The World Trade Center site became the center of an enormous rescue and recovery operation that continued long after the morning of September 11.</div>
+    <div class="hint">Tap to reveal details ↗</div>
+   </div>
+  </article>
+ </section>
+
+ <section class="milestones">
+  <div class="milestone"><b>4</b><span>Commercial passenger aircraft were hijacked.</span></div>
+  <div class="milestone"><b>2,977</b><span>People were killed in the attacks.</span></div>
+  <div class="milestone"><b>3</b><span>Major attack locations: New York City, the Pentagon and Shanksville.</span></div>
+  <div class="milestone"><b>102 min.</b><span>From the first WTC impact to the North Tower's collapse.</span></div>
+ </section>
+
+ <section class="sources">
+  <h2>Keep learning</h2>
+  <p>This infographic draws on historical records from the <a href="https://www.911memorial.org/learn" target="_blank" rel="noopener">9/11 Memorial & Museum</a>, the <a href="https://www.911commission.gov/report/911Report_Ch7.htm" target="_blank" rel="noopener">9/11 Commission Report</a> and the <a href="https://www.archives.gov/research/alic/reference/9-11" target="_blank" rel="noopener">U.S. National Archives</a>.</p>
+ </section>
+</main>
+
+<footer>
+ Created for educational use. Times are approximate and presented in Eastern Daylight Time. The design avoids graphic imagery and emphasizes historical context and remembrance.
+</footer>
+
+<script>
+const buttons=document.querySelectorAll('[data-filter]');
+const events=document.querySelectorAll('.event');
+
+buttons.forEach(button=>{
+ button.addEventListener('click',()=>{
+  buttons.forEach(b=>b.classList.remove('active'));
+  button.classList.add('active');
+  const filter=button.dataset.filter;
+  events.forEach(event=>event.classList.toggle('hidden',filter!=='all' && event.dataset.type!==filter));
+ });
+});
+document.querySelectorAll('.card').forEach(card=>{
+ const toggle=()=>card.classList.toggle('open');
+ card.addEventListener('click',toggle);
+ card.addEventListener('keydown',e=>{
+  if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}
+ });
+});
+</script>
+</body>
+</html>
