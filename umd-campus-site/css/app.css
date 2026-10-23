@@ -1,0 +1,44 @@
+
+.body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: white;
+  color: black;
+}
+
+.header {
+  background-color: #a6192e;
+  color: white;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.h1 {
+  font-size: 36px;
+}
+
+.h2 {
+  font-size: 25px;
+}
+
+.section {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.embed-space {
+  background-color: #f3f3f3;
+  padding: 30px;
+  text-align: center;
+}
+
+.credit {
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.footer {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
